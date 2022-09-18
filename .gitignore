@@ -1,0 +1,8 @@
+.auctex-auto
+*.aux
+*.idx
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
