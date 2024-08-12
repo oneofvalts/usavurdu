@@ -1,2 +1,4 @@
 # usavurdu
-usavurdu, compilation of my certain poems
+
+Output PDF file is under my [directory](http://oneofvalts.sdf.org/media/)
+at SDF.
