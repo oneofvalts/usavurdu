@@ -1,18 +1,37 @@
-\documentclass[10pt, openright, twoside]{memoir}
+\documentclass[10pt, openright, oneside]{memoir}
+
+\setlength{\headheight}{20pt}
+\setlength{\headsep}{10pt}
+\setlength{\footskip}{20pt}
 
 \setstocksize{195mm}{130mm}
 \settrimmedsize{195mm}{130mm}{*}
-\setulmarginsandblock{10mm}{20mm}{*}
-\setlrmarginsandblock{20mm}{10mm}{*}
-\setheadfoot{10mm}{10mm}
-\setheaderspaces{*}{*}{0.5}
-\checkandfixthelayout{}
+\settypeblocksize{160mm}{100mm}{*}
+\setlrmargins{*}{*}{1}
+\setulmargins{*}{*}{1}
+\setmarginnotes{0cm}{0cm}{0cm}
+\checkandfixthelayout
 
-\usepackage{euler}
+%\setulmarginsandblock{10mm}{20mm}{*}
+%\setlrmarginsandblock{20mm}{10mm}{*}
+%\setheadfoot{10mm}{10mm}
+%\setheaderspaces{*}{*}{0.5}
+%\checkandfixthelayout{}
 
-\usepackage[T1]{fontenc}
-\usepackage{ETbb}
-\let\oldstylenums\textosf{}
+%\usepackage{euler}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{ETbb}
+%\let\oldstylenums\textosf{}
+\usepackage[math-style=ISO, bold-style=ISO]{unicode-math}
+\setmainfont{Cooper}[
+BoldFont = Cooper-Medium.ttf,
+ItalicFont = Cooper-Italic.ttf,
+BoldItalicFont = Cooper-MediumItalic.ttf
+]
+\setmonofont[Scale=0.8]{Iosvmata Bold}
+\setmathfont{Garamond-Math.otf}[StylisticSet={7,9}]
+\usepackage[letterspace=0]{microtype}
 
 \usepackage[english]{babel}
 
@@ -29,14 +48,14 @@
 \usepackage{amsmath}
 \usepackage{physics}
 
-\usepackage[
-unicode,
-pdftex,
-pdfpagelabels,
-bookmarks,
-hyperindex,
-hyperfigures,
-hidelinks]{hyperref}
+%\usepackage[
+%unicode,
+%pdfpagelabels,
+%bookmarks,
+%hyperindex,
+%hyperfigures,
+%hidelinks
+%]{hyperref}
 
 \renewcommand{\cftdot}{}
 \addto\captionsenglish{\renewcommand{\chaptername}{bölüm}}
@@ -44,7 +63,24 @@ hidelinks]{hyperref}
 
 \nouppercaseheads{}
 
-\settowidth{\versewidth}{param bahçe uydular ordularla geçti}
+\renewcommand{\poemtitlefont}{\normalfont\bfseries\itshape\raggedright}
+
+\usepackage{varwidth,environ}
+
+\newsavebox{\versebox}
+\NewEnviron{cverse}{%
+  \setlength{\leftmargini}{0pt}%
+  \begin{lrbox}{\versebox}
+  \begin{varwidth}{\textwidth}
+  \begin{verse}
+  \BODY
+  \end{verse}
+  \end{varwidth}
+  \end{lrbox}%
+  \begin{verse}[\wd\versebox]
+  \BODY
+  \end{verse}
+}
 
 \theoremstyle{definition}
 \newtheorem*{alistirma}{alıştırma}
@@ -57,7 +93,8 @@ hidelinks]{hyperref}
 \begin{document}
 \thispagestyle{empty}
 \begin{flushright}
-  \fontsize{0.8in}{0cm}\selectfont{}orman haydutları
+  \textls{\fontsize{0.8in}{0cm}\selectfont{}orman haydutları}
+  %\fontsize{0.8in}{0cm}\selectfont{}orman haydutları
 \end{flushright}
 \begin{flushright}
   \textit{abdullah uyu}
@@ -81,13 +118,11 @@ hidelinks]{hyperref}
 konya'da okudukdan sonra üniversiteye
 istanbul'a geldi. halen galatasaray
 üniversitesi'nde matematik bölümü
-öğrencisidir. hisarüstü'nde ikamet eder.
+öğrencisidir. kartal'da ikamet eder.
 
 şiir yazmaya 2018 senesinde başladı. üç
 sene kadar şiirlerini yakın çevresi dışında
-paylaşmadı. 2022'de mevzular derin fanzin
-ve 2023'de iğreti fanzin'de yazmaya
-başlayarak şiirlerini okuyucuya açmıştır.
+paylaşmadı.
 \newpage
 \tableofcontents
 \chapter{atak beş}
@@ -96,14 +131,14 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{8\baselineskip}
 \poemtitle{pipe}
 \settowidth{\versewidth}{travelling along an asymptote}
-\begin{verse}[\versewidth]
+\begin{cverse}
   think all is approximate \\
   getting more precise is \\
   travelling along an asymptote \\
   speeding up is delicate \\
   and no more useful than \\
   smoking a pipe with a mate \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -112,7 +147,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{21\baselineskip}
 \poemtitle{sessiz}
 \settowidth{\versewidth}{sevgim diyorum dinliyor musun}
-\begin{verse}[\versewidth]
+\begin{cverse}
   dönüp baktım \\
   donuk baktım \\
   bir yerler var içimde \\
@@ -132,7 +167,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   sevgim diyorum dinliyor musun \\
   bazen seni anıyorum \\
   sessiz ah sessiz
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -141,7 +176,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{mutuel}
 \settowidth{\versewidth}{tu dois abandonner un petit peu}
-\begin{verse}[\versewidth]
+\begin{cverse}
   tu dois abandonner un petit peu \\
   pour que tu m'aimes \\
   je vais attendre ton coup \\
@@ -151,7 +186,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   pour que tu m'aimes \\
   je vais attendre tes yeux \\
   je vais t'aimer quand même
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -159,7 +194,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \vspace*{\fill}
 \needspace{31\baselineskip}
 \poemtitle{turuncu\footnote[2]{iowar'in ricası üzerine çıkarıldı.}}
-\begin{verse}[\versewidth]
+\begin{cverse}
   \phantom{}\\
   \phantom{}\\
   \phantom{}\\
@@ -189,7 +224,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   \phantom{}\\
   \phantom{}\\
   \phantom{}\\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -198,7 +233,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{tek harf}
 \settowidth{\versewidth}{sensizlikle dost oldum}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sensizlikle dost oldum \\
   sohbetine doğum yok \\
   fikirlerim sustukça \\
@@ -208,7 +243,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   sohbetine doyum yok \\
   fikirlerim kustukça \\
   alnından tutar oldu
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -217,12 +252,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{bahar}
 \settowidth{\versewidth}{bahar gelir güller açar}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bahar gelir güller açar \\
   eller güler ben gülmem \\
   her güzeli biri sever \\
   sevdim seni sümbül ben
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -231,7 +266,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{dertsiz}
 \settowidth{\versewidth}{ne boştum ben biliyorsun}
-\begin{verse}[\versewidth]
+\begin{cverse}
   derdin yoksa yazma dedi \\
   konuşmayı bıraktım \\
   sevme boşa koşma dedi \\
@@ -240,7 +275,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   silik siyah yuvarlak \\
   ne boştum ben biliyorsun \\
   ne yüreğimi açtım
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -249,12 +284,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{tam}
 \settowidth{\versewidth}{hiçbir şey tam değil de seni yaklaşık sanmışdım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   hiçbir şey tam değil de seni yaklaşık sanmışdım \\
   ardından esintine büyülenip sallanmışdım \\
   çok şey tam yüreğimde en eksiğim bi sen kaldım \\
   iki bakdın bi güldün aklımı elimden aldın
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -263,12 +298,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{factual}
 \settowidth{\versewidth}{you seemed to me then really virtual}
-\begin{verse}[\versewidth]
+\begin{cverse}
   you think i don't know the actual \\
   but you don't also talk so factual \\
   then don't judge me anymore bug \\
   you seemed to me then really virtual
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -277,7 +312,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{17\baselineskip}
 \poemtitle{uzak}
 \settowidth{\versewidth}{solgun bak ne zor görünür ya görünmez havada}
-\begin{verse}[\versewidth]
+\begin{cverse}
   dünya güneşe ne kadar uzaksa \\
   bazı hislere o kadar uzağım \\
   eskisi gibi değil \\
@@ -293,7 +328,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   yoksa dün gibi izi de yarın olur yiter mi \\
   solgun bak ne zor görünür ya görünmez havada \\
   aranır bir körpe çocuk yok kaybolup gider mi
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -302,11 +337,11 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{5\baselineskip}
 \poemtitle{aksiyom}
 \settowidth{\versewidth}{ağlayıp sızlamaya gerek yok}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bu dünyada ne doğru var \\
   ne yanlış var ne gerçek \\
   ağlayıp sızlamaya gerek yok
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -315,12 +350,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{başardılar}
 \settowidth{\versewidth}{bir zamanlar arkadaşdık fakat mühim değil çok}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sevdiğim bazı şeyler var nedir hiç önemi yok \\
   insanlar onlardan nefret etmeyi başardılar \\
   bir zamanlar arkadaşdık fakat mühim değil çok \\
   inatla benden de nefret etmeyi başardılar
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -329,12 +364,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{aşamamışım}
 \settowidth{\versewidth}{bilmem niye durduk yere benim üzülmelerim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   diyebilirsin ki dünle benim problemlerim \\
   aşamamışım onları ben atlatamamışım \\
   bilmem niye durduk yere benim üzülmelerim \\
   eski kaset çalarlara dönüp bakamayışım
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -343,12 +378,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{a\~nız}
 \settowidth{\versewidth}{derin derin göğe bak ve}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ağzı\~nda a\~nız dolu  \\
   bir tarlada yalınayak  \\
   derin derin göğe bak ve \\
   de ki dünya ne garip.
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -357,12 +392,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{saçlarına çal beni}
 \settowidth{\versewidth}{dört bi yana saçık olsam}
-\begin{verse}[\versewidth]
+\begin{cverse}
   havadaki ışık olsam \\
   dört bi yana saçık olsam \\
   saçlarına çalık olsam \\
   yine de doyamam sana
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -371,12 +406,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{fikirler de pernelir}
 \settowidth{\versewidth}{şu lanet yurt odasında}
-\begin{verse}[\versewidth]
+\begin{cverse}
   göğün yüzü turuncuyor \\
   fikirlerim perleniyor \\
   tüm bedenim çürüyor \\
   şu lanet yurt odasında
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -385,7 +420,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{14\baselineskip}
 \poemtitle{portakal esen rüzgar}
 \settowidth{\versewidth}{bırakıp beynimi fikir sellerine}
-\begin{verse}[\versewidth]
+\begin{cverse}
   portakal esen rüzgarı \\
   gülüşüne düğümledin \\
   çözmezsen zamanı \\
@@ -398,7 +433,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   duygularım konuşuyor gözlerine \\
   düşünemiyorum bakarken \\
   güzel yüzüyü\~n ferine
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -407,7 +442,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{13\baselineskip}
 \poemtitle{hududunda dünlerin}
 \settowidth{\versewidth}{artık bir güz rüzgarı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   artık bir güz rüzgarı \\
   esiyorsun sen sarı \\
   sevda ile sonuncu \\
@@ -419,7 +454,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   hududunda dünlerin \\
   seni hatırlıyorum \\
   seyri\~ne dalıyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -428,7 +463,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{is}
 \settowidth{\versewidth}{kalbimde tozuyan küllerde buldum}
-\begin{verse}[\versewidth]
+\begin{cverse}
   havadaki gızıl iste aradım \\
   kalbimde tozuyan küllerde buldum \\
   sabanı\~n serin yelinde aradım \\
@@ -443,7 +478,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   çaresizmişsin garip hallerine \\
   dönüp kendime yorgun bedenime \\
   bakıyorum yazık ettim diyorum.
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -452,7 +487,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{perdeler}
 \settowidth{\versewidth}{gönlümde sen parlarsın}
-\begin{verse}[\versewidth]
+\begin{cverse}
   turuncayan gökleri \\
   izledinse anlarsın \\
   sevgin öyle kalbimde \\
@@ -467,7 +502,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   harflerini çatarsın \\
   sesin öyle kalbimde \\
   küt düğümler perdeler
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -476,7 +511,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{27\baselineskip}
 \poemtitle{asumanla muhabbet}
 \settowidth{\versewidth}{o sevdanı\~n yelidir.}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bana bak göğün yüzü \\
   sen turuncu olunca \\
   varsa eğer başımda \\
@@ -502,7 +537,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   parıldayan o kormuş \\
   anladım benim gibi \\
   seni de biri yormuş
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -511,7 +546,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{12\baselineskip}
 \poemtitle{taşlarlar}
 \settowidth{\versewidth}{bugün akıl var sanrı yok.}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bugün akıl var sanrı yok. \\
   güneş var kölge var. \\
   yiğit var er var. \\
@@ -522,7 +557,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   görürse fikirlerim \\
   taşlarlar yüreğini \\
   razı olmam yanmana
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -531,7 +566,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{beynemaz}
 \settowidth{\versewidth}{$\mathcal{L}(U, V)$ kategori}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bildim $f$ lipschitzienne \\
   $\mathcal{L}(U, V)$ kategori \\
   geçirdim tüm vakiti \\
@@ -546,7 +581,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   soluk güzler bahara \\
   dönsün diye dönüştüm \\
   dönüştüm beynemaza
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -555,7 +590,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{yüreğiyi\~n tahtını\~n kolçağı}
 \settowidth{\versewidth}{düşsem bir gün kalbi\~ne}
-\begin{verse}[\versewidth]
+\begin{cverse}
   parçalasam tersine \\
   dönen tüm kasnakları \\
   düşsem bir gün kalbi\~ne \\
@@ -565,7 +600,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   tahtına nazar etsem \\
   yürüsem kolçağına \\
   bakarak sersem sersem
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -574,12 +609,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{yetki}
 \settowidth{\versewidth}{bir yetkim yok anladım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir yetkim yok anladım \\
   hayatım üzerine \\
   ömrümce bakacağım \\
   o güzel gözlerine
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -588,12 +623,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{küreler}
 \settowidth{\versewidth}{zannediyorum çok küre kıra kıra bura geldim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   zannediyorum çok küre kıra kıra bura geldim \\
   sorma bana doğruyu yanlışı aklı erdemi \\
   fakat bu sonuncunun kör etti dağılan bendi \\
   bilmem dışarda mıyım söyle yoksa içerde mi
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -602,12 +637,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{küllerini gönlüne sar}
 \settowidth{\versewidth}{bulamam senin gibi hem güzel hem sözleri bal}
-\begin{verse}[\versewidth]
+\begin{cverse}
   yakarım al sesimi küllerini gönlüne sar \\
   beyaz mavi yeşil mor boyanıp da gönlüme dal \\
   oyalanma uzakta ah gel beraber gezelim \\
   bulamam senin gibi hem güzel hem sözleri bal
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -648,12 +683,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{yakışık}
 \settowidth{\versewidth}{isteğim bana kendinden başka bir arkadaş ver}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ben böyle tek başıma yürümek istemiyorum \\
   isteğim bana kendinden başka bir arkadaş ver \\
   ne gülmek belli ne ağlamak huzur istiyorum \\
   isteğim bana kendinden başka bir arkadaş ver
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -662,7 +697,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{istemediklerim}
 \settowidth{\versewidth}{her gün senden daha fazla}
-\begin{verse}[\versewidth]
+\begin{cverse}
   severken insanlığıma \\
   imtihan istemedim \\
   dertsiz tasasız başıma \\
@@ -671,7 +706,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   kaçmayı istemedim \\
   çık işte gönül bahçemden \\
   çık kurtulayım senden
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -680,12 +715,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{terzi}
 \settowidth{\versewidth}{sessiz sakin bir yerde}
-\begin{verse}[\versewidth]
+\begin{cverse}
   iplik iğne ve kumaş \\
   oturup keseceğim \\
   sessiz sakin bir yerde \\
   defterler dikeceğim
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -694,12 +729,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{beşik}
 \settowidth{\versewidth}{sonra sarardın sen de üzüldün baktık ardından}
-\begin{verse}[\versewidth]
+\begin{cverse}
   pek güzel bir gün idin rüzgarınla güneşinle \\
   güldük koştuk eğlendik kollarında beşiğinde \\
   sonra sarardın sen de üzüldün baktık ardından \\
   gitme bizi bırakma buruk kalpler eşiğinde
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -708,7 +743,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{14\baselineskip}
 \poemtitle{arkadaş}
 \settowidth{\versewidth}{biraz kalem biraz defter konuşsun}
-\begin{verse}[\versewidth]
+\begin{cverse}
   looking for a friend \\
   speaks geek and some poem \\
   wandering around \\
@@ -721,7 +756,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   çevrende dolaşıyorum \\
   ümidiyle bir rastlantı \\
   bi an gelsin sözlerimiz buluşsun
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -730,7 +765,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{leylaya}
 \settowidth{\versewidth}{mutluydum bıktım bak dert sahibi artık bu gemi}
-\begin{verse}[\versewidth]
+\begin{cverse}
   boğulmak bana yakışmıyor sil gözyaşlarımı \\
   otur karşımda ya da gel ağlayalım sarılıp \\
   savrulacak yanıma boş bir deryaya karılıp \\
@@ -740,7 +775,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   mutluydum bıktım bak dert sahibi artık bu gemi \\
   bil ki çok yorgunum bekleme bu halde gülmemi \\
   ne huzurum ne sevincim ne de aklım var benim \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -749,12 +784,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{şaheser}
 \settowidth{\versewidth}{fersiz nemli gözlerim sor kimin eseridir}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bitirdim mürekkebi kanım katsam yeridir \\
   fersiz nemli gözlerim sor kimin eseridir \\
   senin aşkın ölümün bir diğer bedenidir \\
   fersiz nemli gözlerim sor kimin eseridir
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -763,12 +798,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{kar yağar}
 \settowidth{\versewidth}{kar yağar yağmur yağar}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sen üzülme güzelim \\
   ikimiz üzülürsek \\
   kar yağar yağmur yağar \\
   taşar gönlüm sel olur
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -777,7 +812,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{gazel}
 \settowidth{\versewidth}{siz de sürüklenmeyin}
-\begin{verse}[\versewidth]
+\begin{cverse}
   durun orda gazeller \\
   siz de sürüklenmeyin \\
   benim sevda yolunda \\
@@ -787,7 +822,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bir güzelin peşinden \\
   yolun sonun bilmeden \\
   koşup gittiğim gibi
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -796,12 +831,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{gaye}
 \settowidth{\versewidth}{gel peşimden bilinmeze gidelim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   gel peşimden bilinmeze gidelim \\
   sevda içip kayıp çölde gezelim \\
   sarhoşluğun belirsiz gayesiyle \\
   arayalım sevgiyi raks edelim
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -810,7 +845,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{17\baselineskip}
 \poemtitle{tanrı seni korusun}
 \settowidth{\versewidth}{hatta sen tüm evrenin}
-\begin{verse}[\versewidth]
+\begin{cverse}
   önce kendi çevrenin \\
   sonra bütün beldenin \\
   hatta sen tüm evrenin \\
@@ -826,7 +861,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   herkese görünmekten \\
   tanrı seni korusun \\
   tanrı seni korusun
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -835,12 +870,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{hicran}
 \settowidth{\versewidth}{damla damla hicransın gözümde aylardır leyla}
-\begin{verse}[\versewidth]
+\begin{cverse}
   damla damla hicransın gözümde aylardır leyla \\
   ağlayıp dökmekle bitsen ah bitiremiyorum \\
   günlerim aşkını içmekle geçse de belirsiz \\
   ne tam sarhoş geziyorum ne tam ayığım leyla
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -849,13 +884,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{aklıma geldin}
 \settowidth{\versewidth}{karşıda çamlar soruyor ne gözlerinin rengi}
-\begin{verse}[\versewidth]
+\begin{cverse}
   gün battı gökyüzü mavi yine aklıma geldin \\
   bulanık sadece ay var yüreğimi açacak \\
   karşıda çamlar soruyor ne gözlerinin rengi \\
   gözlerinin rengidir ne nazarımdan kaçacak \\
   ne cesaretim var sana ilgimi anlatacak
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -864,12 +899,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{mütekerrir}
 \settowidth{\versewidth}{ben istiyorum bitsin bu mütekerrir hicranım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ben istiyorum bitsin bu mütekerrir hicranım \\
   yoktur bulamıyorum derman biçare derdine \\
   hem dalıyorum bir saba şarkı ile bitabım \\
   yokluğunun bulutları bak yeniden geldiler
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -878,7 +913,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{param bahçe}
 \settowidth{\versewidth}{senden bir ses bekledim gel konuşalım diyecek}
-\begin{verse}[\versewidth]
+\begin{cverse}
   param bahçe uydular ordularla geçti küller \\
   senden bir ses bekledim gel konuşalım diyecek \\
   ne gülebiliyordum ne iştah vardı yiyecek \\
@@ -887,7 +922,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   dengi güçler \\
   geçdi günler \\
   paramparça uykular korkularla geçti günler
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -896,12 +931,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{kalem kağıt mürekkep}
 \settowidth{\versewidth}{kalem kağıt mürekkep}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kalem kağıt mürekkep \\
   şiir yazar dururdum \\
   peşinde dolaşmaktan \\
   güzelim çok yoruldum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -910,7 +945,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{bulanlar}
 \settowidth{\versewidth}{bir gün sevmek isteyip}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir gün sevmek isteyip \\
   yollarımı beklersen \\
   yerde sarı gazele \\
@@ -925,7 +960,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   aramakla bulunmam \\
   bulanları keşfedip \\
   sor acaba nerdeyim
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -934,7 +969,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{herkes gibi}
 \settowidth{\versewidth}{ben de herkes gibi aşık oldum sana}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ben de herkes gibi aşık oldum sana \\
   bambaşka başladı aynı bitti işte \\
   bakıp gökyüzünü yüze anımsamam \\
@@ -944,7 +979,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   gidilecek yol var alamıyorum \\
   aşkını kalbimden söküp atsam da \\
   söndürüp külünü saçamıyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -953,12 +988,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{elde varken}
 \settowidth{\versewidth}{elde varken tüm aklımı tükettim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   elde varken tüm aklımı tükettim \\
   yokluğunda sinirlendim pişmanım \\
   iyiliği sabahları aradım \\
   akşam olup üzüntüyle yanarım
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -968,14 +1003,14 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{8\baselineskip}
 \poemtitle{sen de bi küreydin}
 \settowidth{\versewidth}{bir garipken yankılanan}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir garipken yankılanan \\
   yüreğinin çeperinde \\
   kırıp sevda küresini \\
   çıkıp izlerime baktım \\
   paramparça o evreni \\
   unutmak nehrine attım
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -984,12 +1019,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{tekrar tekrar}
 \settowidth{\versewidth}{o kadar çok şey var ki sana dair bilmediğim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   her aklıma geldiğinde bir şiir yazıyorum \\
   yokluğunu kalbime tekrar tekrar kazıyorum \\
   o kadar çok şey var ki sana dair bilmediğim \\
   bazı zaman gizeminden kaçarak yaşıyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -998,7 +1033,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{üşengeç}
 \settowidth{\versewidth}{tüm çer çöp çarpar sana}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kıpırdamayan taşsın \\
   sen efkar nehrimde \\
   tüm çer çöp çarpar sana \\
@@ -1008,7 +1043,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   yerinden ayaklansan \\
   bu sefer sel götürür \\
   kaldırmaz gönlüm aklım
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1017,12 +1052,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{rayhânasa}
 \settowidth{\versewidth}{akar kalbim seyreline}
-\begin{verse}[\versewidth]
+\begin{cverse}
   günben güne âhefbine \\
   akar kalbim seyreline \\
   bilmun olsa rayhânasa \\
   bakar berum feyrenine
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1031,7 +1066,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{22\baselineskip}
 \poemtitle{kalanlar}
 \settowidth{\versewidth}{hem anlatsaydın ne vardı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   şimdileri neş'enin \\
   yerini sessizlik aldı \\
   pür sevgimden geriye \\
@@ -1052,7 +1087,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   ah söyle sen kaç dizesin \\
   saklanıp efkarımla \\
   yazıp bitiremiyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1061,7 +1096,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{sevgi}
 \settowidth{\versewidth}{sar belinden bir gülşenin yorgun kolların açıp}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sevgi darmadağın edip erittikden sonra ah \\
   usanmayıp gözlerinden hoş gülmeni bekliyor \\
   yavaşca arkandan gelip bir güzel bul ona bak \\
@@ -1076,7 +1111,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   tüm dünyanı süsler ondan gelen yitik bir nigah \\
   bir sağa git bir sola dön dolaş sen onu an \\
   var yanına iltifat et durma aşık ol diyor
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1085,12 +1120,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{bold}
 \settowidth{\versewidth}{lazy looking luxury lacks}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bipolar bitch being bold \\
   dull disaster doing deck \\
   lazy looking luxury lacks \\
   righteous roundly relax
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1099,12 +1134,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{o zamanlar}
 \settowidth{\versewidth}{rüzgar arkamda mehtap sarıydı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   o zamanlar bağ üzüm bağıydı \\
   düşer önüne aşkın yürürdüm \\
   rüzgar arkamda mehtap sarıydı \\
   bekler yolunu kalbim sürürdüm
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1113,7 +1148,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{belli belirsiz}
 \settowidth{\versewidth}{hem önemli hem önemsiz}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bazen seni düşünürken \\
   gökte belli belirsiz \\
   uzak sarı turuncayan \\
@@ -1122,7 +1157,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bir sokakta yürürken \\
   hem önemli hem önemsiz \\
   her şeyden geçiyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1131,12 +1166,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{arkadaşım ve arkadaşının}
 \settowidth{\versewidth}{sana izin veriyorum}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sakın bağırma bana \\
   bağırabilirsin ama \\
   sana izin veriyorum \\
   ama sadece sana
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1145,12 +1180,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{iki iki}
 \settowidth{\versewidth}{bana bir yar galiba şu kıpkızıl güneş kaldı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bu ikindi her şeyi iki iki görüyorum \\
   bana bir yar galiba şu kıpkızıl güneş kaldı \\
   temelli iyileşmek ta başından görmüyordum \\
   fakat hiç bırakmadın aklımı çok kötü aldın
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1159,7 +1194,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{14\baselineskip}
 \poemtitle{solgun dolaşıyorum}
 \settowidth{\versewidth}{görüp kalbi binbir göçük}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bazen gözlerinden kaçıp \\
   saklanmak istiyorum \\
   bazen sözlerini alıp \\
@@ -1172,7 +1207,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bazen gözlerinden kaçıp \\
   görüp kalbi binbir göçük \\
   senden geçemiyorum
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1181,12 +1216,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{disjonction cas}
 \settowidth{\versewidth}{bu halimi baştan bilsem yine sevmek isterdim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   tümümden geçip senin kendimi sevgine serdim \\
   bu halimi baştan bilsem yine sevmek isterdim \\
   göz görmez kulak duymaz ah düşünmez biserdim \\
   bu halimi baştan bilsem yine sevmek isterdim \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1195,12 +1230,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{aşka başım}
 \settowidth{\versewidth}{sen en sevdiğim şiir arkadaşım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sen en sevdiğim şiir arkadaşım \\
   daha hiç cevabından gocunmadım \\
   ne zaman kanasa hem aşka başım \\
   yanımda yanımda sen yanımdasın \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1209,12 +1244,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{aşk küresi parlayıncazık}
 \settowidth{\versewidth}{düşerim sevgiyle bir kez baksan heyecanından}
-\begin{verse}[\versewidth]
+\begin{cverse}
   düşerim sevgiyle bir kez baksan heyecanından \\
   evren-i hayalime ben bakarak kaybolurum \\
   göğsümdeki aşk küresi parlar birden harından \\
   kaynar sinemde kanım da hüsnünde yok olurum \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1223,7 +1258,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{intentionally left blank}
 \settowidth{\versewidth}{i behold their books for ages}
-\begin{verse}[\versewidth]
+\begin{cverse}
   i presume i am \\
   one of those pages \\
   intentionally left blank \\
@@ -1233,7 +1268,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   i behold their books for ages \\
   so it is that reader \\
   rendering me sore \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1242,14 +1277,14 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{8\baselineskip}
 \poemtitle{sakınılacaklar}
 \settowidth{\versewidth}{bir coşar bir dalgın kor onunki benzemez aşka}
-\begin{verse}[\versewidth]
+\begin{cverse}
   durmaz işte orda da gözler yine yerde başka \\
   bir coşar bir dalgın kor onunki benzemez aşka \\
   bir girift muhabbette sakın ondan sözlerini \\
   bir kez sarhoş ayrılma geçirip günleri baygın \\
   bilinmez bir haline bağlanıp da gözlerini \\
   oyma kalbinin sonra dolu da onmaz ah boş da \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1258,7 +1293,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{gizemin --- öztanıma son çağrı}
 \settowidth{\versewidth}{\textit{sevgim} ve bilmediğim duygularından başka}
-\begin{verse}[\versewidth]
+\begin{cverse}
   \textit{sevgim} ve bilmediğim duygularından başka \\
   bir kere istemedim tanımak \\
   ne ben tanıyorum seni şimdi \\
@@ -1267,7 +1302,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   ağırlığı aşkının çoktürdüyse de bir zaman \\
   ne \textit{sevgim} diyorum seni \\
   ne de o gizemini siliyorsun \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1276,12 +1311,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{hamdım pişdim hamdım\footnote[2]{anagramatikdir.}}
 \settowidth{\versewidth}{afraid reine war wang}
-\begin{verse}[\versewidth]
+\begin{cverse}
   afraid reine war wang \\
   defrag win aware rain \\
   frage drain ware wain \\
   raw refined raw again \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1290,7 +1325,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{20\baselineskip}
 \poemtitle{kabımız --- gece vakti ``{\ttfamily{}sort -R}'' eylençesi}
 \settowidth{\versewidth}{ancak üzüntüden kaçmağa gücümüz yeter}
-\begin{verse}[\versewidth]
+\begin{cverse}
   dolaşırız avareyiz \\
   sanki daha büyük bi kap bulduk \\
   o da biter paramparçayız işte \\
@@ -1309,7 +1344,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   o da biter paramparçayız işte \\
   sanki daha büyük bi kap bulduk \\
   şimdi bulsak da eksiğiz \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1318,12 +1353,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{yeteri}
 \settowidth{\versewidth}{başından sonuna kadar durmasam hiç ağlasam}
-\begin{verse}[\versewidth]
+\begin{cverse}
   tüm nihavend şarkıları birbirine ulasam \\
   başından sonuna kadar durmasam hiç ağlasam \\
   gündüzleri gece etsem akşamları bağlasam \\
   gene yine sevgin etmez tarif-i aşka yetmez \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1332,7 +1367,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{15\baselineskip}
 \poemtitle{dahada değiliz}
 \settowidth{\versewidth}{yorgunluk sağı içimizden}
-\begin{verse}[\versewidth]
+\begin{cverse}
   boş bi otobüs durağı \\
   ıslak bi defter \\
   yağmurlar ancak sağanak \\
@@ -1346,7 +1381,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   daha da değiliz \\
   fenikmek solu \\
   solduk \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1355,12 +1390,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{kim yanar kim eksilir}
 \settowidth{\versewidth}{işte ben o havaydım çevrendeydim durdum her an}
-\begin{verse}[\versewidth]
+\begin{cverse}
   senin ateş olduğun inanıyorum hakikat \\
   hava elzem yanmakda sen de biliyorsun fakat \\
   işte ben o havaydım çevrendeydim durdum her an \\
   tükendim sen yan diye eksildim öldüm her an \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1369,7 +1404,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{16\baselineskip}
 \poemtitle{ben arkadaşım ve çocuk}
 \settowidth{\versewidth}{tüm geceler gündüz olmuş tüm gündüzler de gece}
-\begin{verse}[\versewidth]
+\begin{cverse}
   müzmin sarhoş bir adamın ağzı tatsa ne olur \\
   tüm güzeller surat assa o rahatsız mı olur \\
   tükenip külleri kalmış arkasından susulmuş \\
@@ -1384,7 +1419,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   annelerine çocuklar yalvardı hece hece \\
   bugün geç girelim eve ilkindiyi sevdik biz \\
   şimdi oynayamazsak hem yarın sabah ne var ki \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1393,7 +1428,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{düşününce geri}
 \settowidth{\versewidth}{ne yapsan da tek kişilik çok yorucu bir oyun}
-\begin{verse}[\versewidth]
+\begin{cverse}
   aşkın susup düşünmekdir uzun peşrevler boyu \\
   ne yapsan da tek kişilik çok yorucu bir oyun \\
   ben gibi bir acemiye senin gibi bir sorun \\
@@ -1403,7 +1438,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   şimdi düşününce geri sen her daim ayıkdın \\
   tamam ben bir aşıkdım da sen niye cesaretsiz \\
   kararsız suskun çekingen bazı zaman kayıpdın \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1412,7 +1447,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{fikri\~n}
 \settowidth{\versewidth}{gece köz görünen gündüz kül}
-\begin{verse}[\versewidth]
+\begin{cverse}
   gece köz görünen gündüz kül \\
   daha kül olmadım \\
   gülleri fazla ışık üzer \\
@@ -1421,7 +1456,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   karanlığa rüyaya yattım \\
   bir fikrine bir bana baktım \\
   daha kör olmadım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1430,12 +1465,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{tam üç sene}
 \settowidth{\versewidth}{bir tebessüm diğerini sevgiyle kovaladı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir tebessüm diğerini sevgiyle kovaladı \\
   efkar-ı aşkın beni tam üç sene oyaladı \\
   o karmaşa dehşetle kaç kabus sayamadım \\
   efkar-ı aşkın beni tam üç sene oyaladı \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1444,7 +1479,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{oturağa zaman}
 \settowidth{\versewidth}{çok küçük bir haber yeter güzel gönlünden bahset}
-\begin{verse}[\versewidth]
+\begin{cverse}
   uzadıya muhabbet zor varsın kısacık olsun \\
   hoş bir iki kelam gelsin izleri senden olsun \\
   çok küçük bir haber yeter güzel gönlünden bahset \\
@@ -1454,7 +1489,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   kanımca mürekkep biter küller tozur zihinde \\
   uzadıya muhabbet zor varsın kısacık olsun \\
   çok küçük bir haber yeter güzel gönlünden bahset \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1463,12 +1498,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{memnuniyetsiz}
 \settowidth{\versewidth}{nefessiz ölmek istiyorsan git ara sana çığ mı yok?}
-\begin{verse}[\versewidth]
+\begin{cverse}
   nefessiz ölmek istiyorsan git ara sana çığ mı yok? \\
   bir lafın bari huzur versin bir kere ol kedere tok \\
   bir belirsizlik yumağıdır neresinden asılsam küt \\
   amına koduğumun puştu bi tanıma da sığmıyor \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1477,7 +1512,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{21\baselineskip}
 \poemtitle{real-to-real}
 \settowidth{\versewidth}{kısa soluk çatılar var hiç mi hiç bilmesen de}
-\begin{verse}[\versewidth]
+\begin{cverse}
   duygularım benim gerçekden gerçeğe \\
   vasıtasız bir ezginin yolunu bulmasıdır \\
   on bir tuş onulmaz bir çeşm-i serçeye \\
@@ -1497,7 +1532,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   sır bu doğmaz nauşşaka deği \\
   etdik kesdik bulduk olduk doğduk \\
   bir gülşeni çok sevmekle solduk \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1506,7 +1541,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{yoksa --- bir düzelti örneği}
 \settowidth{\versewidth}{karşından konuşmağa coşkun sevgimi sındırdım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   seni tarif etmeğe elma dalları eğildi \\
   bakışların gözünden ta al kalbime değindi \\
   karşından konuşmağa coşkun sevgimi sındırdım \\
@@ -1516,7 +1551,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bakışların gözünden ta kalbime değindi \\
   karşından konuşmağa coşkun sevgim sındırdım \\
   yoksa o gülüşünden kaçmak harcım değildi \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1525,11 +1560,11 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{5\baselineskip}
 \poemtitle{har\footnote[2]{ilk türkçe anagramatik şiirim.}}
 \settowidth{\versewidth}{eksiliyoruz her an}
-\begin{verse}[\versewidth]
+\begin{cverse}
   eksiliyoruz her an \\
   eskiyoruz ran hile \\
   kinle har esiyoruz
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1538,7 +1573,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{15\baselineskip}
 \poemtitle{kölge\~n}
 \settowidth{\versewidth}{çûn akletdik ya vurduk usa ne gerçek varsa}
-\begin{verse}[\versewidth]
+\begin{cverse}
   dolan dur o makamdan \\
   ne in ne çık andan \\
   sırsa da gizledin \\
@@ -1552,7 +1587,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   ondan kalbim gam çekmez \\
   ve nitekim ancak ondandır mahzun \\
   tüm sevgin göğsüme de dolsa \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1561,7 +1596,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{21\baselineskip}
 \poemtitle{kalem sazı --- bir taze koşma}
 \settowidth{\versewidth}{derler yazmak}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kıvran dalda \\
   hava soluk \\
   fikir sağda \\
@@ -1581,7 +1616,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   apapak ten \\
   derler yazmak \\
   çal o sazı \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1590,12 +1625,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{aşk içinde}
 \settowidth{\versewidth}{gönül içre tupturuncu bir hüznümüz var}
-\begin{verse}[\versewidth]
+\begin{cverse}
   aşk işinde çoğumuzun sırtında yangı \\
   acemiyiz yok ol sevgide nasibimiz \\
   dibimizde dönse dursa al çalgı çengi \\
   gönül içre tupturuncu bir hüznümüz var \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1604,7 +1639,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{aklı\~n tahrası}
 \settowidth{\versewidth}{sevdiğin duysam ben böyle m'olurdum}
-\begin{verse}[\versewidth]
+\begin{cverse}
   daraldım boyumca boğuldum doldum \\
   bir güzeli sevmekle dünden oldum \\
   sarılsam boynuna ağlasam canım \\
@@ -1614,7 +1649,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   sevgimin sındırdım aldım darasın \\
   gönlümü budamaz aklın tahrası \\
   sevdiğin duysam ben böyle m'olurdum \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1623,7 +1658,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{on hold}
 \settowidth{\versewidth}{askıda çok fikrim var}
-\begin{verse}[\versewidth]
+\begin{cverse}
   soba üstünde güğüm \\
   dolak ip olur düğüm \\
   askıda çok fikrim var \\
@@ -1633,7 +1668,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   uca urgan takalım \\
   yan yana oturalım \\
   karşımıza bakalım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1642,12 +1677,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{asma karar}
 \settowidth{\versewidth}{seni bilmek imkansız da bil ben seni çok sevdim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bitirdin mi ol ezgiyi asma karar mı verdin? \\
   o seyri çok aradın bura boşa mı geldin? \\
   seni bilmek imkansız da bil ben seni çok sevdim \\
   seni sana sormalıymış ol makamdan durmalıymış \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1656,12 +1691,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{tasse}
 \settowidth{\versewidth}{bir bardak sevgi idim fikir dolu tasdım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   çoraplarım sekide yeleğimi asdım \\
   bir bardak sevgi idim fikir dolu tasdım \\
   beceremedım belki öğrenmekdi kasdım \\
   saçlarından tozuyan kalbinden akan ne \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1670,12 +1705,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{différentiation}
 \settowidth{\versewidth}{aklım açık}
-\begin{verse}[\versewidth]
+\begin{cverse}
   aklım açık \\
   aklıma çık \\
   aklı kaçık \\
   aklı saçık \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1684,7 +1719,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{the time the heart glows}
 \settowidth{\versewidth}{bir kalp ki ne zaman görse parlar apak ay gibi}
-\begin{verse}[\versewidth]
+\begin{cverse}
   içinden mürekkep akar bir dolma kalem gibi \\
   bir kalp ki ne zaman görse parlar apak ay gibi \\
   bazen kalkamaz yerinden bazı seker tay gibi \\
@@ -1694,7 +1729,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   gerek söner mana olur gerek bakılır cisim \\
   anda durur garipserim kendime tel çekişim \\
   anlamağa aklım yetmez koşmağa peşe gücüm \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1703,12 +1738,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{ismini düşünmemişdim çok}
 \settowidth{\versewidth}{kaç zamandır sarhoşum tek sevgi\~nle uyanırım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   öylece uykum var ki bir sen gelsen uyanırım \\
   kaç zamandır sarhoşum tek sevgi\~nle uyanırım \\
   ismiyi\~n güzelliğin gerçekde bugün anladım \\
   sensiz ne kadar azım lütfet ancak uyanırım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1717,7 +1752,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{13\baselineskip}
 \poemtitle{çok fazla gizin}
 \settowidth{\versewidth}{varır yanı\~na durur kölge olur mu korkuları\~na vurup}
-\begin{verse}[\versewidth]
+\begin{cverse}
   eski yeni değil yakışır şimdi \\
   gözüme görükmekle peşi\~nden izim \\
   varır yanı\~na durur kölge olur mu korkuları\~na vurup \\
@@ -1729,7 +1764,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   dolar yarına ümit mutlu olur mu bir nasıl bilmekden \\
   çok fazla gizin \\
   aklım pek buğulu fikrim deşildi \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1738,12 +1773,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{non-proper}
 \settowidth{\versewidth}{sen giderken suçun yalan bir kar gibi yağmakdı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kar nasıl yağarsa bir öpücük öyle olmalı \\
   gök nasıl gürlerse bir ayrılık öyle olmalı \\
   sen giderken suçun yalan bir kar gibi yağmakdı \\
   geri kalan bende iğne iplik bir kazak bir atkı \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1752,12 +1787,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{yüz sefer}
 \settowidth{\versewidth}{çûn bir hoş sevmekle gül ben yüz sefer sevdim seni}
-\begin{verse}[\versewidth]
+\begin{cverse}
   yok çaresi çat kaşını fikrim çokdan düz artık \\
   kalma orda gel burayı ora yarın güz artık \\
   korkma yanlış yapmakdan hem kimiyse de üz artık \\
   çûn bir hoş sevmekle gül ben yüz sefer sevdim seni \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1766,12 +1801,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{iki harfe}
 \settowidth{\versewidth}{zerre ümit bulsa senden kalbim bahre karılır}
-\begin{verse}[\versewidth]
+\begin{cverse}
   az bir can bula kollarım o gülşene sarılır \\
   şair bütün uykusunu iki harfe değişir \\
   zerre ümit bulsa senden kalbim bahre karılır \\
   daim bekler bir gönülden seviyorum değişin \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1780,12 +1815,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{birden}
 \settowidth{\versewidth}{gönül birden dolmaz işde sevgi de birden doğmaz}
-\begin{verse}[\versewidth]
+\begin{cverse}
   gönül birden dolmaz işde sevgi de birden doğmaz \\
   seven pişman olmaz işde daralan yarın bolmaz \\
   bana düşünme deyen yar dinle keremin aklet \\
   ben deli değilem işde uşşakın aklı olmaz \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1794,13 +1829,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{sen gülünce taptaze}
 \settowidth{\versewidth}{en güzelcik bir aşkla eksik uykularım benim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   en derin hislerimi sana açabiliyorum \\
   sanki ne konuşsam hem sevgime saygısızlık \\
   en güzelcik bir aşkla eksik uykularım benim \\
   sen gülünce taptaze eğricik parmaklarından \\
   harfler kendiliğinden birbirini kucaklıyor \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1809,12 +1844,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{senden fazla senim}
 \settowidth{\versewidth}{doksan dokuz eksil çûn yüzü benim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   doksan dokuz eksil çûn yüzü benim \\
   gözüne bakmakla gökyüzü benim \\
   sana yapılan tüm hoş taltiflerin \\
   kendimden vermekle hep özü benim \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1823,7 +1858,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{36\baselineskip}
 \poemtitle{post-love}
 \settowidth{\versewidth}{var dersen eğer iğne ipliğe bunlardan bahsedersen}
-\begin{verse}[\versewidth]
+\begin{cverse}
   iğne iplik bir beyinde kazak sermeli \\
   güzelse de toprak yoldan çok savrulmalı \\
   rengi yok hem neden bugün bir sevgiyle beş hece \\
@@ -1858,7 +1893,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bölünmüş uykularımda nedir niye sorarım \\
   sezemediğim hislerin \\
   benim bilemediklerim \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1867,12 +1902,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{atak beşin mutfağı}
 \settowidth{\versewidth}{parlar birden hakikat tüm zihinler gelir tava}
-\begin{verse}[\versewidth]
+\begin{cverse}
   cevap bulduk yıllarca on bin önerme on sava \\
   gitmesin atak beşden o misafirperver hava \\
   mütekerrir fikirler toplaşıp küçük zinide \\
   parlar birden hakikat tüm zihinler gelir tava \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1881,12 +1916,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{istisnasız hepsi}
 \settowidth{\versewidth}{ilk akşamdan bir rast çığlık kopardın da bağırdın}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ilk akşamdan bir rast çığlık kopardın da bağırdın \\
   her zerre-i kalbimi sen o gün aşka çağırdın \\
   bir gülüşe büyülendim sevgi ya ağır ağır \\
   her üzüntüne soldum ben bak ağır ağır yandım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1895,12 +1930,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{bahariye'ye akşam çökerken}
 \settowidth{\versewidth}{onlar da sevgime benzer aşmışdır çok hudutlar}
-\begin{verse}[\versewidth]
+\begin{cverse}
   merakıma mucip oldu akşam durgun bulutlar \\
   onlar da sevgime benzer aşmışdır çok hudutlar \\
   tupturuncu şu çatının üzerinde bulanık \\
   zihnim gibi yavaşlamış kızıl güruh güruhlar \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1909,12 +1944,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{sönmedin}
 \settowidth{\versewidth}{ne yapdımsa sönmedin bir çıra misali yandın}
-\begin{verse}[\versewidth]
+\begin{cverse}
   yine üstümde bir yük ölüp dalmışım uykuya \\
   etrafımda sevginden izler bularak uyandım \\
   istikbali karanlık o gece döndün korkuya \\
   ne yapdımsa sönmedin bir çıra misali yandın \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1923,12 +1958,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{iki hece}
 \settowidth{\versewidth}{kalbimde kalmadı yok sana dair hiçbir tasvir}
-\begin{verse}[\versewidth]
+\begin{cverse}
   dündü geceydi ismin asuman iki heceydi \\
   turuncadı sarardı kurumuş sevgime değdi \\
   kalbimde kalmadı yok sana dair hiçbir tasvir \\
   hatırlat kendini de diyeyim canıma değdi \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1936,12 +1971,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \vspace*{\fill}
 \needspace{6\baselineskip}
 \poemtitle{$\neg\neg(\neg\neg p \implies p)$ --- bir sezgiselci aşırı düzelti}
-\begin{verse}[\versewidth]
+\begin{cverse}
   \phantom{}\\
   \phantom{}\\
   \phantom{}\\
   \phantom{}\\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1950,13 +1985,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{çok turuncular}
 \settowidth{\versewidth}{çûn kalbi\~ne girmekle ben çok turuncular yakdım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   belki de bir tohumdan artakalan kadarsındır \\
   eylül ekim değil de adı\~n aylardan kasımdır \\
   ya kaskaranlık kuru ya apaydınlık mersindir \\
   arda düş ışığıyı\~n gel çekince\~ni sındır \\
   çûn kalbi\~ne girmekle ben çok turuncular yakdım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1965,12 +2000,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{quite true}
 \settowidth{\versewidth}{very is my existence diminished by the cruel}
-\begin{verse}[\versewidth]
+\begin{cverse}
   beware my dear it is quite true \\
   somewhat complicated certainly blue \\
   very is my existence diminished by the cruel \\
   not orthogonal not conforming to any rule \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1979,12 +2014,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{asynchronous}
 \settowidth{\versewidth}{kalbinde bir yer buldum yaşlı bir ağacın dibi}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kalbinde bir yer buldum yaşlı bir ağacın dibi \\
   ardı ardına sevdik ben sonbahar sen kış gibi \\
   yoruldum dinlendim be aynı anda değildik biz \\
   ardı ardına sevdik ben sonbahar sen kış gibi \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -1993,12 +2028,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{son bir ayım}
 \settowidth{\versewidth}{son bir aydır hayalimde her gün on kibrit çakdım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   son bir aydır hayalimde her gün on kibrit çakdım \\
   efkar-ı suzan-ı aşkla al sigaralar yakdım \\
   çok oldu sehven sedanın unutdum yankısını \\
   kapadım gözlerimi hayal-i hüsnüne bakdım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2007,30 +2042,30 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{dün}
 \settowidth{\versewidth}{bir yağmuru beklemekle yanılmış ben güz olmuşum}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir yağmuru beklemekle yanılmış ben güz olmuşum \\
   tozudum ben kül idim sarılmış ben köz olmuşum \\
   bir kürede sıkışmış karanlık ve yapayalnız \\
   kırmayı beklemekle yorulmuş ben dün olmuşum \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
-\newpage
-\topskip0pt
-\vspace*{\fill}
-\needspace{9\baselineskip}
-\poemtitle{solumuz\footnote[2]{bahsedilen üçden numan yüksel'indir.}}
-\settowidth{\versewidth}{adım adım süzüldük eve doğru}
-\begin{verse}[\versewidth]
-  üç adam bir geceydik \\
-  adım adım süzüldük eve doğru \\
-  solumuzda dünler \\
-  solumuzda dünler \\
-  geç kalan yarınlara sağırız \\
-  üç yalnız bir heceydik \\
-  bağıra bağıra eve doğru \\
-\end{verse}
-\vspace*{\fill}
+%\newpage
+%\topskip0pt
+%\vspace*{\fill}
+%\needspace{9\baselineskip}
+%\poemtitle{solumuz\footnote[2]{bahsedilen üçden numan yüksel'indir.}}
+%\settowidth{\versewidth}{adım adım süzüldük eve doğru}
+%\begin{cverse}
+%  üç adam bir geceydik \\
+%  adım adım süzüldük eve doğru \\
+%  solumuzda dünler \\
+%  solumuzda dünler \\
+%  geç kalan yarınlara sağırız \\
+%  üç yalnız bir heceydik \\
+%  bağıra bağıra eve doğru \\
+%\end{cverse}
+%\vspace*{\fill}
 %
 \newpage
 \topskip0pt
@@ -2038,12 +2073,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{the absolutely incomplete why}
 \settowidth{\versewidth}{you were affectionate}
-\begin{verse}[\versewidth]
+\begin{cverse}
   you were affectionate \\
   i think that's \\
   what made me fall \\
   in love with you \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2052,10 +2087,10 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{4\baselineskip}
 \poemtitle{les observateurs}
 \settowidth{\versewidth}{ama çok da yukarıda değiliz}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kimseyi aşağılıyoruz doğru \\
   ama çok da yukarıda değiliz \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2064,7 +2099,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{37\baselineskip}
 \poemtitle{a non-excuse}
 \settowidth{\versewidth}{geriye kaldı defterde belirsiz on bir sayfa}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir \\
   fakat \\
   bir \\
@@ -2100,7 +2135,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   girift ardından hileli pür gerektirmelerin \\
   biz olanın içindeyiz sadece gözlemciyiz \\
   bakarız gördüğümüze örtmeyiz bir pelerin \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2109,7 +2144,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{13\baselineskip}
 \poemtitle{aynı andayız}
 \settowidth{\versewidth}{bu bahçede ki sevgimiz yetişir içinde}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sipersiz konuşmalar \\
   konuşlanıp aldırdık ilgimizi \\
   rastgeleyiz \\
@@ -2121,7 +2156,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   ne üşüyoruz ne sabah oluyor \\
   aynı andayız \\
   ne az yerdeyiz \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2130,12 +2165,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{damn logic proxies}
 \settowidth{\versewidth}{a turk is cursing in a self-referential manner}
-\begin{verse}[\versewidth]
+\begin{cverse}
   a turk is cursing in a self-referential manner \\
   perse loves quirks and logic proxies \\
   no causality thus no consequence \\
   blurs the chains lives in a thin banner \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2144,12 +2179,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{nib}
 \settowidth{\versewidth}{through which ink flows}
-\begin{verse}[\versewidth]
+\begin{cverse}
   a heart like a nib \\
   through which ink flows \\
   a heart whenever sees \\
   glows glows glows \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2158,7 +2193,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{bitecek de}
 \settowidth{\versewidth}{eskidendi bir evtik arardık}
-\begin{verse}[\versewidth]
+\begin{cverse}
   yaz geldi bahar uzak \\
   küçük serçeler kaçıyor \\
   dar geliyor geniş evler \\
@@ -2168,7 +2203,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bakalım deyip bekliyoruz \\
   biliyoruz bitecek de \\
   sarardık \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2177,7 +2212,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{12\baselineskip}
 \poemtitle{ruhsuz bakıyorum}
 \settowidth{\versewidth}{hayat bi şarkı söylemeye başladı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   cevap bekleyen gözlere \\
   hayat bi şarkı söylemeye başladı \\
   konuşanın karşısında tepkisizim \\
@@ -2189,7 +2224,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   her kelimesi şifre sanki \\
   müzik tanıdık geliyor da \\
   ruhsuz bakıyorum \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2198,7 +2233,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{14\baselineskip}
 \poemtitle{yet --- a dream about logic}
 \settowidth{\versewidth}{everything depends on something}
-\begin{verse}[\versewidth]
+\begin{cverse}
   it depends how you lay them \\
   reason infection \\
   ratty cast and blurry \\
@@ -2211,7 +2246,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   set what you observe \\
   is not at all lie \\
   yet there are consequences \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2220,7 +2255,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{9\baselineskip}
 \poemtitle{onunduysa}
 \settowidth{\versewidth}{sonbahara bir türlü belirmeyen}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bestenigara \\
   sonbahara bir türlü belirmeyen \\
   beyaz ışıklı gömleklere \\
@@ -2228,7 +2263,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   ölmeklere hem \\
   onunduysa maharet \\
   en sonunda saadet \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2237,7 +2272,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{10\baselineskip}
 \poemtitle{sağımız}
 \settowidth{\versewidth}{bir yaz gecesi gibi esiyordu}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir yaz gecesi gibi esiyordu \\
   sabah oldu konya'da \\
   havada asılı efkar dağıldı \\
@@ -2246,7 +2281,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   aşığız \\
   son umudumuz gün \\
   sevildik dün \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2255,12 +2290,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{predetermined}
 \settowidth{\versewidth}{gönül bahçemin yeni bahçevanı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   gönül bahçemin yeni bahçevanı \\
   bu gül sana emanet \\
   senindir yolarsan da \\
   acıyıp sularsan da \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2269,13 +2304,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{the appropriate vector}
 \settowidth{\versewidth}{the fences change their}
-\begin{verse}[\versewidth]
+\begin{cverse}
   the fences change their \\
   fulfilling life \\
   hence they file \\
   the sadness \\
   they defence \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2284,7 +2319,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{13\baselineskip}
 \poemtitle{\scshape{}valts}
 \settowidth{\versewidth}{ben sevildiğimi göz ardı ettim hep}
-\begin{verse}[\versewidth]
+\begin{cverse}
   aklını kaybedenler \\
   nerede yaşıyor \\
   ve başkasını seveni sevenler \\
@@ -2296,7 +2331,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   bunu da sen yetir \\
   eflatun yalan yelek \\
   beni uyandırma \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2305,7 +2340,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{23\baselineskip}
 \poemtitle{ördüğü}
 \settowidth{\versewidth}{gerçek değil gördüğü}
-\begin{verse}[\versewidth]
+\begin{cverse}
   ağız tadı \\
   hem sıradan \\
   hem sabıkalı \\
@@ -2327,7 +2362,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   başka şey değil \\
   mutsuzlukdur sürekli \\
   ördüğü \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2336,7 +2371,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{çok fazla neden}
 \settowidth{\versewidth}{bir ay kaldı izliyor bir de benim yokdur işim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir aydır izliyorum gecelerin tükenişin \\
   artık ne karanlıkdır ne aydınlık benim içim \\
   yanlış seçimler yanlış doğrular doğru niçin \\
@@ -2346,7 +2381,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   artık yok karanlık bak aydınlık göğün bitişi \\
   yalnız ağaçlar yalnız ve bahçeler serin niçin \\
   niçin sessiz sokaklar neden ışık bekleyişim \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2355,12 +2390,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{kapladı}
 \settowidth{\versewidth}{geçdim seni\~n özü\~nden ben döndüm kendi özüme}
-\begin{verse}[\versewidth]
+\begin{cverse}
   geçdim seni\~n özü\~nden ben döndüm kendi özüme \\
   kalıntısı sözleriyi\~n dağıttım közlerini \\
   duman duman pek sağanak bi yağmurdu çözülen \\
   göklerden sevgindi güzel kapladı gözlerimi \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2369,11 +2404,11 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{5\baselineskip}
 \poemtitle{zan}
 \settowidth{\versewidth}{gezdim gözlerinin hudutlarında yalnız kaldım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   şu zamana geldim bilmiyorum sevildimse de \\
   gezdim gözlerinin hudutlarında yalnız kaldım \\
   bir küreydim biri parçalar beni bakar sandım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2382,12 +2417,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{un autre disjonction cas}
 \settowidth{\versewidth}{sevgiyi dudaklarına ben koydum senin}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sevgiyi dudaklarına ben koydum senin \\
   yok dedinse de değdim sözlerine \\
   aşk ışığını gözlerine ben koydum \\
   bakmadınsa da değdim gözlerine \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2396,13 +2431,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{o da benim gibi}
 \settowidth{\versewidth}{bilmem hiç yetişmeden kalpde kaç lale solmuşdur}
-\begin{verse}[\versewidth]
+\begin{cverse}
   sevgiyi\~n ateşi öçeli seneler olmuşdur \\
   yepyeni yangısı gönlüme daha dün konmuşdur \\
   bilmem hiç yetişmeden kalpde kaç lale solmuşdur \\
   ağlar deme niye bulutlar gözleri güzel kız \\
   o da benim gibi efkarla daralmış dolmuşdur \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2411,12 +2446,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{mukavemet}
 \settowidth{\versewidth}{ya hiç yoktu ta başından ya da ben boşa evdim}
-\begin{verse}[\versewidth]
+\begin{cverse}
   kalbim bomboş hakikaten bilmem nerede sevgin \\
   ya hiç yoktu ta başından ya da ben boşa evdim \\
   çok garip dayandı kalbim yine de tek parçadır \\
   ya dolanır sokaklarda ya uçar bir serçedir \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2425,7 +2460,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{11\baselineskip}
 \poemtitle{saçlarının uçları}
 \settowidth{\versewidth}{sustukça harlanır aman bir cehennem özlemin}
-\begin{verse}[\versewidth]
+\begin{cverse}
   saçlarının ucu hasret arkasından özlenir \\
   aşkın bi dağ gözümde ne aşılır ne sözlenir \\
   sustukça harlanır aman bir cehennem özlemin \\
@@ -2435,7 +2470,7 @@ başlayarak şiirlerini okuyucuya açmıştır.
   düşünmeye vaktim pek dar \\
   bazen yağmur bazense kar \\
   yağar ah hasta kor beni \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2444,12 +2479,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{hatırana saygı}
 \settowidth{\versewidth}{seni her ne kadar sevsem de yoksun bugün}
-\begin{verse}[\versewidth]
+\begin{cverse}
   seni hiç gerçekden sevdim mi bilmiyorum \\
   yine de ben senden kalanı silmiyorum \\
   seni her ne kadar sevsem de yoksun bugün \\
   gece kadar sessiz dün kadar yoksun bugün \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2458,12 +2493,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{ansızın}
 \settowidth{\versewidth}{bir şeyler şaşırtsın diye boşa beklerim yine}
-\begin{verse}[\versewidth]
+\begin{cverse}
   bir şeyler şaşırtsın diye boşa beklerim yine \\
   huzurlu değilim hem daraldım üzgünüm yine \\
   böyle derdi oturup da ben anlatayım kime \\
   bazı sakin zaman yanar durup dururken sinem \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2472,12 +2507,12 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{6\baselineskip}
 \poemtitle{söker}
 \settowidth{\versewidth}{az konuş çok gül güzel kız çevrendekiler haklı}
-\begin{verse}[\versewidth]
+\begin{cverse}
   az konuş çok gül güzel kız çevrendekiler haklı \\
   bir sevgi ki gözlerinde söker inatla aklı \\
   pak tatlı hoş sözlerin bilmem nerede saklı \\
   bir sevgi ki gözlerinde söker inatla aklı \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 %
 \newpage
@@ -2486,13 +2521,13 @@ başlayarak şiirlerini okuyucuya açmıştır.
 \needspace{7\baselineskip}
 \poemtitle{işte}
 \settowidth{\versewidth}{gerisi değil bana lazım}
-\begin{verse}[\versewidth]
+\begin{cverse}
   itiraz yasak \\
   dolayısıyla üzüntü var \\
   bırak hepsine itirazım \\
   işte mutluyum \\
   gerisi değil bana lazım \\
-\end{verse}
+\end{cverse}
 \vspace*{\fill}
 \let\clearpage\relax
 \end{document}
